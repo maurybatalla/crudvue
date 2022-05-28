@@ -46,7 +46,7 @@ export default {
 
             var datosEnviar={nombre:this.empleado.nombre,correo:this.empleado.correo}
 
-             fetch('http://www.svr1.ar/empleados/?insertar=1',{
+             fetch('https://www.svr1.ar/empleados/?insertar=1',{
                  method:"POST",
                  body:JSON.stringify(datosEnviar)
              })

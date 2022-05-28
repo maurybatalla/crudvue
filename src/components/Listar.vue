@@ -54,7 +54,7 @@ export default {
     methods:{
         //http://localhost/empleados/
         consultarEmpleados(){
-            fetch('http://www.svr1.ar/empleados/')
+            fetch('https://www.svr1.ar/empleados/')
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)
@@ -68,7 +68,7 @@ export default {
         },
         borrarEmpleado(id){
             console.log(id);
-             fetch('http://www.svr1.ar/empleados/?borrar='+id)
+             fetch('https://www.svr1.ar/empleados/?borrar='+id)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)

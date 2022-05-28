@@ -45,7 +45,7 @@ export default {
     },
     methods:{
         obtenerInformacionID(){
-            fetch('http://www.svr1.ar/empleados/?consultar='+this.$route.params.id)
+            fetch('https://www.svr1.ar/empleados/?consultar='+this.$route.params.id)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)
@@ -58,7 +58,7 @@ export default {
         actualizarRegistro(){
             var datosEnviar={id:this.$route.params.id,nombre:this.empleado.nombre,correo:this.empleado.correo}
 
-             fetch('http://www.svr1.ar/empleados/?actualizar='+this.$route.params.id,{
+             fetch('https://www.svr1.ar/empleados/?actualizar='+this.$route.params.id,{
                  method:"POST",
                  body:JSON.stringify(datosEnviar)
              })
