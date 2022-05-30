@@ -6,6 +6,11 @@
                 Empleados
             </div>
             <div class="card-body">
+                <div class="form-group">
+                  <label for="">Nombre</label>
+                  <input v-on:input="filtrar()" v-model="txtFiltrar"  type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+        
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -16,6 +21,8 @@
                         </tr>
                     </thead>
                     <tbody>
+           
+                        
                         <tr v-for="empleado in empleados" :key="empleado.id">
                             <td>{{empleado.id}}</td>
                             <td>{{empleado.nombre}}</td>
@@ -28,6 +35,7 @@
                                 </div>
                             </td>
                         </tr>
+
                     
                     </tbody>
                 </table>
@@ -45,13 +53,33 @@ export default {
 
     data(){
         return{
-            empleados:[]
+            empleados:[],
+            txtFiltrar:'',
+
         }
     },
     created:function(){
         this.consultarEmpleados();
     },
     methods:{
+        filtrar(){
+            //console.log(this.txtFiltrar)
+            if (this.txtFiltrar==='') {
+                this.consultarEmpleados();
+            }
+
+            this.empleados = this.empleados.filter(e =>{
+                if (e.nombre.search(this.txtFiltrar) != -1) {
+                   return true
+                } else {
+                    return false
+                }
+            })
+        
+
+
+            //this.empleados = this.empleados.filter(e => e.nombre == this.txtFiltrar)
+        },
         //http://localhost/empleados/
         consultarEmpleados(){
             fetch('https://www.svr1.ar/empleados/')
