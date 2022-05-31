@@ -28,7 +28,6 @@
                             <td>{{empleado.nombre}}</td>
                             <td>{{empleado.correo}}</td>
                             <td>
-
                                 <div class="btn-group" role="group" aria-label="">
                                     <div class="row">
                                         <div class="col">
@@ -37,16 +36,10 @@
                                         <div class="col">
                                             <button type="button" v-on:click="borrarEmpleado(empleado.id)" class="btn btn-danger">Borrar</button>
                                         </div>
-                                    </div>
-
-
-
-                                    
+                                    </div> 
                                 </div>
                             </td>
                         </tr>
-
-                    
                     </tbody>
                 </table>
             </div>
@@ -59,6 +52,7 @@
     </div>
 </template>
 <script>
+import axios from "axios";
 export default {
 
     data(){
@@ -73,46 +67,59 @@ export default {
     },
     methods:{
         filtrar(){
-            //console.log(this.txtFiltrar)
             if (this.txtFiltrar==='') {
                 this.consultarEmpleados();
             }
 
             this.empleados = this.empleados.filter(e =>{
+
                 if (e.nombre.search(this.txtFiltrar) != -1) {
                    return true
                 } else {
-                    return false
+                   return false
                 }
+
             })
-        
-
-
-            //this.empleados = this.empleados.filter(e => e.nombre == this.txtFiltrar)
         },
-        //http://localhost/empleados/
         consultarEmpleados(){
-            fetch('https://www.svr1.ar/empleados/')
+            
+            axios.get("https://www.svr1.ar/empleados/").then((result) => {
+                console.log(result.data);
+                this.empleados = []
+                this.empleados = result.data;
+  
+            })
+            
+            
+            /*fetch('https://www.svr1.ar/empleados/')
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
-                console.log(datosRespuesta)
+                //console.log(datosRespuesta)
                 this.empleados = []
                 if(typeof datosRespuesta[0].success==='undefined')
                 {
                     this.empleados = datosRespuesta;
                 }
             })
-            .catch(console.log)
+            .catch(console.log)*/
         },
         borrarEmpleado(id){
             console.log(id);
-             fetch('https://www.svr1.ar/empleados/?borrar='+id)
+
+            axios.get('https://www.svr1.ar/empleados/?borrar='+id).then((result) => {
+                console.log(result.data);
+                this.consultarEmpleados()
+
+            })
+
+
+            /* fetch('https://www.svr1.ar/empleados/?borrar='+id)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)
                 window.location.href="listar"
             })
-            .catch(console.log)
+            .catch(console.log)*/
         }
 
     }
