@@ -11,7 +11,7 @@
                   <input v-on:input="filtrar()" v-model="txtFiltrar"  type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
         
                 </div>
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -30,8 +30,18 @@
                             <td>
 
                                 <div class="btn-group" role="group" aria-label="">
-                                    <router-link :to="{name:'Editar',params:{id:empleado.id}}" class="btn btn-info">Editar</router-link>
-                                    <button type="button" v-on:click="borrarEmpleado(empleado.id)" class="btn btn-danger">Borrar</button>
+                                    <div class="row">
+                                        <div class="col">
+                                            <router-link :to="{name:'Editar',params:{id:empleado.id}}" class="btn btn-info">Editar</router-link>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" v-on:click="borrarEmpleado(empleado.id)" class="btn btn-danger">Borrar</button>
+                                        </div>
+                                    </div>
+
+
+
+                                    
                                 </div>
                             </td>
                         </tr>
